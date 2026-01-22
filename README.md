@@ -5,6 +5,12 @@ A full-stack video upload, sensitivity processing, and streaming application wit
 ![VideoStream](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
+## 🌐 Live Demo
+
+- **Frontend:** [https://video-streamer-dusky.vercel.app](https://video-streamer-dusky.vercel.app)
+- **Backend API:** [https://videostreamer-2oof.onrender.com](https://videostreamer-2oof.onrender.com)
+
+
 ## ✨ Features
 
 - **Video Upload & Streaming**: Upload videos with drag & drop, stream with adaptive playback
@@ -71,6 +77,8 @@ npm run dev
 ```
 
 ## 🔐 Demo Credentials
+
+Use these credentials to test the features on the **Live Demo**:
 
 | Role   | Email                    | Password    |
 |--------|--------------------------|-------------|
