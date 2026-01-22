@@ -1,4 +1,4 @@
-# VideoStream - AI Video Processing Platform
+# VideoStream - Full-stack video upload, processing, sensitivity analysis & streaming platform
 
 A full-stack video upload, sensitivity processing, and streaming application with real-time progress updates.
 
