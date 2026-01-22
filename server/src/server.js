@@ -17,7 +17,16 @@ const httpServer = createServer(app);
 // Setup Socket.io
 const io = new Server(httpServer, {
     cors: {
-        origin: process.env.CLIENT_URL || 'http://localhost:5173',
+        origin: (origin, callback) => {
+            if (!origin) return callback(null, true);
+            const clients = process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',').map(o => o.trim().replace(/\/$/, "")) : [];
+            const isAllowed = clients.includes(origin) || origin.endsWith('.vercel.app') || origin === 'http://localhost:5173';
+            if (isAllowed) {
+                callback(null, true);
+            } else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
         methods: ['GET', 'POST'],
         credentials: true
     }
