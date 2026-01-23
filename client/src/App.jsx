@@ -8,6 +8,7 @@ import Upload from './pages/Upload';
 import Videos from './pages/Videos';
 import VideoDetail from './pages/VideoDetail';
 import Admin from './pages/Admin';
+import Settings from './pages/Settings';
 
 function App() {
     return (
@@ -41,6 +42,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/videos" element={<Videos />} />
                 <Route path="/videos/:id" element={<VideoDetail />} />
+                <Route path="/settings" element={<Settings />} />
                 <Route
                     path="/upload"
                     element={

@@ -36,6 +36,7 @@ const Navbar = () => {
     const navLinks = [
         { to: '/dashboard', label: 'Dashboard', icon: FiGrid },
         { to: '/videos', label: 'Video Library', icon: FiVideo },
+        { to: '/settings', label: 'Settings', icon: FiSettings },
     ];
 
     if (canManageUsers) {
@@ -126,8 +127,8 @@ const Navbar = () => {
                                                         {user?.role}
                                                     </span>
                                                 </div>
-                                                <Link to="/profile" className="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-400 hover:bg-slate-800/50 hover:text-white transition-colors">
-                                                    <FiUser className="w-4 h-4" /> Profile Settings
+                                                <Link to="/settings" className="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-400 hover:bg-slate-800/50 hover:text-white transition-colors">
+                                                    <FiSettings className="w-4 h-4" /> Account Settings
                                                 </Link>
                                                 <button
                                                     onClick={handleLogout}
