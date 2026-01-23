@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useSocket } from '../context/SocketContext';
@@ -27,6 +27,20 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
+    const userMenuRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+                setUserMenuOpen(false);
+            }
+        };
+
+        if (userMenuOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [userMenuOpen]);
 
     const handleLogout = async () => {
         await logout();
@@ -94,7 +108,7 @@ const Navbar = () => {
                             )}
 
                             {/* User Menu */}
-                            <div className="relative">
+                            <div className="relative" ref={userMenuRef}>
                                 <button
                                     onClick={() => setUserMenuOpen(!userMenuOpen)}
                                     className="flex items-center gap-2 p-1 rounded-full hover:bg-slate-800/50 transition-colors"
@@ -109,36 +123,33 @@ const Navbar = () => {
 
                                 <AnimatePresence>
                                     {userMenuOpen && (
-                                        <>
-                                            <div
-                                                className="fixed inset-0 z-10"
+                                        <motion.div
+                                            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                                            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                                            className="absolute right-0 mt-3 w-64 glass-card-strong z-[100] py-2 shadow-2xl overflow-hidden border border-slate-800/50"
+                                        >
+                                            <div className="px-4 py-3 border-b border-slate-800/50">
+                                                <p className="text-sm font-semibold text-white truncate">{user?.username}</p>
+                                                <p className="text-xs text-slate-500 truncate">{user?.email}</p>
+                                                <span className={`mt-2 block w-fit ${getRoleClass(user?.role)}`}>
+                                                    {user?.role}
+                                                </span>
+                                            </div>
+                                            <Link
+                                                to="/settings"
                                                 onClick={() => setUserMenuOpen(false)}
-                                            />
-                                            <motion.div
-                                                initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                                                animate={{ opacity: 1, scale: 1, y: 0 }}
-                                                exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                                                className="absolute right-0 mt-3 w-64 glass-card-strong z-[100] py-2 shadow-2xl overflow-hidden border border-slate-700/50"
+                                                className="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-400 hover:bg-slate-800/50 hover:text-white transition-colors"
                                             >
-
-                                                <div className="px-4 py-3 border-b border-slate-800/50">
-                                                    <p className="text-sm font-semibold text-white truncate">{user?.username}</p>
-                                                    <p className="text-xs text-slate-500 truncate">{user?.email}</p>
-                                                    <span className={`mt-2 block w-fit ${getRoleClass(user?.role)}`}>
-                                                        {user?.role}
-                                                    </span>
-                                                </div>
-                                                <Link to="/settings" className="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-400 hover:bg-slate-800/50 hover:text-white transition-colors">
-                                                    <FiSettings className="w-4 h-4" /> Account Settings
-                                                </Link>
-                                                <button
-                                                    onClick={handleLogout}
-                                                    className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/5 transition-colors text-left"
-                                                >
-                                                    <FiLogOut className="w-4 h-4" /> Sign Out
-                                                </button>
-                                            </motion.div>
-                                        </>
+                                                <FiSettings className="w-4 h-4" /> Account Settings
+                                            </Link>
+                                            <button
+                                                onClick={handleLogout}
+                                                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/5 transition-colors text-left"
+                                            >
+                                                <FiLogOut className="w-4 h-4" /> Sign Out
+                                            </button>
+                                        </motion.div>
                                     )}
                                 </AnimatePresence>
                             </div>
