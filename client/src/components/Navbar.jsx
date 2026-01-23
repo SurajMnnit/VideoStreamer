@@ -118,8 +118,9 @@ const Navbar = () => {
                                                 initial={{ opacity: 0, scale: 0.95, y: 10 }}
                                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                                 exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                                                className="absolute right-0 mt-3 w-64 glass-card-strong z-20 py-2 shadow-2xl overflow-hidden"
+                                                className="absolute right-0 mt-3 w-64 glass-card-strong z-[100] py-2 shadow-2xl overflow-hidden border border-slate-700/50"
                                             >
+
                                                 <div className="px-4 py-3 border-b border-slate-800/50">
                                                     <p className="text-sm font-semibold text-white truncate">{user?.username}</p>
                                                     <p className="text-xs text-slate-500 truncate">{user?.email}</p>

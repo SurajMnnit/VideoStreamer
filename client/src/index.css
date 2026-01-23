@@ -53,12 +53,17 @@
   }
 
   .glass-strong {
-    @apply bg-slate-900/80 backdrop-blur-2xl border border-slate-700/50;
+    @apply bg-slate-900/95 backdrop-blur-2xl border border-slate-700/50;
   }
 
   .glass-card {
     @apply glass rounded-2xl transition-all duration-300;
   }
+
+  .glass-card-strong {
+    @apply glass-strong rounded-2xl transition-all duration-300;
+  }
+
 
   .glass-card-hover {
     @apply glass-card hover:bg-slate-800/70 hover:border-slate-700/70 hover:shadow-2xl hover:shadow-indigo-500/5 hover:-translate-y-0.5;
