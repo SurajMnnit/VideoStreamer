@@ -104,7 +104,6 @@ const Navbar = () => {
                                     >
                                         {getInitials(user?.username)}
                                     </div>
-                                    <FiMenu className="w-4 h-4 text-slate-400 mr-1" />
                                 </button>
 
                                 <AnimatePresence>
