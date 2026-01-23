@@ -176,6 +176,7 @@ const VideoPlayer = ({ src, poster, title }) => {
                 onClick={togglePlay}
                 playsInline
                 preload="metadata"
+                crossOrigin="anonymous"
             />
 
             {/* Error State */}
